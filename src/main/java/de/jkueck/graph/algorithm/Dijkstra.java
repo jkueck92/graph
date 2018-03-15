@@ -1,5 +1,6 @@
-package de.jkueck.graph.simple;
+package de.jkueck.graph.algorithm;
 
+import de.jkueck.graph.model.*;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.Minutes;

@@ -1,4 +1,4 @@
-package de.jkueck.graph.simple;
+package de.jkueck.graph.model;
 
 public enum TrafficType {
 

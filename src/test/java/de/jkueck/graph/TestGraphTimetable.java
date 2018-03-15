@@ -1,6 +1,7 @@
-package de.jkueck.simple;
+package de.jkueck.graph;
 
-import de.jkueck.graph.simple.*;
+import de.jkueck.graph.algorithm.Dijkstra;
+import de.jkueck.graph.model.*;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.junit.jupiter.api.Test;
@@ -55,7 +56,6 @@ public class TestGraphTimetable {
         graph.getNodes().add(nodeC);
         graph.getNodes().add(nodeD);
         graph.getNodes().add(nodeE);
-
 
         Dijkstra dijkstra = new Dijkstra();
         Route route = dijkstra.dijsktra1(nodeA, nodeE, new LocalDateTime(2018, 3, 15, 0, 5));
