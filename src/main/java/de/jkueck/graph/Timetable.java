@@ -26,14 +26,18 @@ public class Timetable {
         this.line = line;
         this.departure = departure;
         this.arrival = arrival;
-        this.duration = Minutes.minutesBetween(departure, arrival);
+        if (departure != null) {
+            this.duration = Minutes.minutesBetween(departure, arrival);
+        }
     }
 
     public Timetable(Line line, LocalTime departure, LocalTime arrival) {
         this.line = line;
         this.departure = departure;
         this.arrival = arrival;
-        this.duration = Minutes.minutesBetween(departure, arrival);
+        if (departure != null) {
+            this.duration = Minutes.minutesBetween(departure, arrival);
+        }
     }
 
     @Override

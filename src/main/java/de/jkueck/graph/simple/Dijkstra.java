@@ -15,6 +15,7 @@ public class Dijkstra {
 
 		startNode.setCosts(0);
 		startNode.setPreviousNode(startNode);
+		startNode.setTimetable(new Timetable(null, null, departureDateTime.toLocalTime()));
 
 		LocalTime tmpDepartureTime = departureDateTime.toLocalTime();
 
@@ -42,13 +43,12 @@ public class Dijkstra {
 					}
 					priorityQueue.add(edge.getTo());
 				}
+
 			}
 
 			minNode.setProcessed(Boolean.TRUE);
 
-			// if (minNode.getTimetable() != null) {
-				tmpDepartureTime = minNode.getTimetable().getArrival();
-			// }
+			tmpDepartureTime = minNode.getTimetable().getArrival();
 
 		}
 

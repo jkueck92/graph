@@ -37,15 +37,15 @@ public class TestGraphTimetable {
 		nodeB.getOut().add(edgeBE);
 
 		Edge edgeBC = new Edge(nodeB, nodeC);
-		edgeBC.getTimetables().add(new Timetable(line2, new LocalTime(0, 30), new LocalTime(0, 35)));
+		edgeBC.getTimetables().add(new Timetable(line2, new LocalTime(0, 35), new LocalTime(0, 40)));
 		nodeB.getOut().add(edgeBC);
 
 		Edge edgeCD = new Edge(nodeC, nodeD);
-		edgeCD.getTimetables().add(new Timetable(line2, new LocalTime(0, 35), new LocalTime(0, 37)));
+		edgeCD.getTimetables().add(new Timetable(line2, new LocalTime(0, 40), new LocalTime(0, 42)));
 		nodeC.getOut().add(edgeCD);
 
 		Edge edgeDE = new Edge(nodeD, nodeE);
-		edgeDE.getTimetables().add(new Timetable(line2, new LocalTime(0, 37), new LocalTime(0, 39)));
+		edgeDE.getTimetables().add(new Timetable(line2, new LocalTime(0, 42), new LocalTime(0, 44)));
 		nodeD.getOut().add(edgeDE);
 
 		Edge edgeFE = new Edge(nodeF, nodeE);
