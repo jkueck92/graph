@@ -1,5 +1,6 @@
 package de.jkueck.graph.algorithm;
 
+import de.jkueck.graph.common.TimetableUtils;
 import de.jkueck.graph.model.*;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
@@ -26,7 +27,7 @@ public class Dijkstra {
             tmpDepartureTime = minNode.getTimetable().getArrival();
 
             for (Edge edge : minNode.getOut()) {
-                Timetable timetable = this.findNextDeparture(edge.getTimetables(), tmpDepartureTime);
+                Timetable timetable = TimetableUtils.findNextDeparture(edge.getTimetables(), tmpDepartureTime);
 
                 if (!edge.getTo().isProcessed()) {
 
@@ -114,16 +115,6 @@ public class Dijkstra {
         // route.setName(route.getRouteDetails().getFirst().getName() + " -> " + route.getRouteDetails().getLast().getName());
 
         return route;
-    }
-
-
-    private Timetable findNextDeparture(Set<Timetable> timetables, LocalTime departureTime) {
-        for (Timetable timetable : timetables) {
-            if (departureTime.compareTo(timetable.getDeparture()) <= 0) {
-                return timetable;
-            }
-        }
-        return null;
     }
 
 }
