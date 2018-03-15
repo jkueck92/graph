@@ -1,4 +1,4 @@
-package de.jkueck.graph;
+package de.jkueck.graph.simple;
 
 import lombok.Getter;
 
