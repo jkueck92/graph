@@ -36,7 +36,7 @@ public class TimetableUtilsTest {
     @Test
     public void test5() {
         Set<Timetable> timetableSet = new HashSet<>();
-        // timetableSet.add(new Timetable(null, new LocalTime(10, 0), new LocalTime(11, 0), null));
+        timetableSet.add(new Timetable(null, new LocalTime(10, 0), new LocalTime(11, 0)));
         assertNull(TimetableUtils.findNextDeparture(timetableSet, null));
     }
 

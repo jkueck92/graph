@@ -8,7 +8,7 @@ import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
-import java.util.List;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class TestDijkstra {
 
@@ -59,16 +59,11 @@ public class TestDijkstra {
         Dijkstra dijkstra = new Dijkstra();
         Route route = dijkstra.dijkstra02(new DijkstraRequest(nodeA, nodeD, new LocalDateTime(2018, 3, 16, 0, 5), 1));
 
-        log.info("");
-
-        dijkstra.printRoute(route);
-
-        log.info("");
-
-    }
-
-    @Test
-    public void test02() {
+        assertEquals(3, route.getRouteDetails().size());
+        assertEquals(1, route.getChanges());
+        assertEquals("A", route.getRouteDetails().get(0).getName());
+        assertEquals("B", route.getRouteDetails().get(1).getName());
+        assertEquals("D", route.getRouteDetails().get(2).getName());
 
     }
 
