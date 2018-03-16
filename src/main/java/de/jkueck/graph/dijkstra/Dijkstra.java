@@ -10,7 +10,7 @@ import java.util.*;
 
 public class Dijkstra {
 
-    public LinkedList<Wrapper> dijkstra02(Node start, Node end, LocalDateTime departureDateTime) {
+    public Route dijkstra02(Node start, Node end, LocalDateTime departureDateTime) {
 
         HashMap<String, Integer> costs = new HashMap<>();
 
@@ -45,30 +45,32 @@ public class Dijkstra {
                     costs.put(edge.getTo().getName(), Integer.MAX_VALUE);
                 }
 
-                int a = timetable.getDuration().getMinutes();
-                int b = Minutes.minutesBetween(tmpLocalTime, timetable.getDeparture()).getMinutes();
-                int c = minWrapper.getCosts();
-                int d = a + b + c;
+                if (timetable != null) {
 
-                Wrapper w = new Wrapper();
-                if (d <= costs.get(edge.getTo().getName())) {
+                    int a = timetable.getDuration().getMinutes();
+                    int b = Minutes.minutesBetween(tmpLocalTime, timetable.getDeparture()).getMinutes();
+                    int c = minWrapper.getCosts();
+                    int d = a + b + c;
 
-                    w.setNode(edge.getTo());
-                    w.setCosts(d);
-                    w.setPrevious(minWrapper);
-                    w.setTimetable(timetable);
+                    Wrapper w = new Wrapper();
+                    if (d <= costs.get(edge.getTo().getName())) {
 
-                    if (minWrapper.getTimetable() == null) {
-                        minWrapper.setTimetable(timetable);
+                        w.setNode(edge.getTo());
+                        w.setCosts(d);
+                        w.setPrevious(minWrapper);
+                        w.setTimetable(timetable);
+
+                        if (minWrapper.getTimetable() == null) {
+                            minWrapper.setTimetable(timetable);
+                        }
+
+                        priorityQueue.add(w);
+                        wrappers.add(w);
+
+                        costs.put(edge.getTo().getName(), d);
+
                     }
-
-                    priorityQueue.add(w);
-                    wrappers.add(w);
-
-                    costs.put(edge.getTo().getName(), d);
-
                 }
-
             }
 
 
@@ -76,12 +78,12 @@ public class Dijkstra {
 
         Collections.reverse(wrappers);
 
-        return this.generateRoute(wrappers, end);
+        return this.getRoute(wrappers, end);
 
     }
 
-    private LinkedList<Wrapper> generateRoute(List<Wrapper> wrappers, Node end) {
-        LinkedList<Wrapper> route = new LinkedList<>();
+    private Route getRoute(List<Wrapper> wrappers, Node end) {
+        LinkedList<RouteDetail> routeDetails = new LinkedList<>();
         Wrapper wrapper = null;
         for (Wrapper tmpWrapper : wrappers) {
             if (tmpWrapper.getNode().getName().equals(end.getName())) {
@@ -89,17 +91,17 @@ public class Dijkstra {
             }
         }
         while (wrapper != null) {
-            route.add(wrapper);
+            routeDetails.add(new RouteDetail(wrapper.getNode().getName(), wrapper.getTimetable().getArrival(), wrapper.getTimetable().getDeparture()));
             wrapper = wrapper.getPrevious();
         }
-        Collections.reverse(route);
-        return route;
+        Collections.reverse(routeDetails);
+        return new Route(routeDetails.getFirst().getName() + " -> " + routeDetails.getLast().getName(), routeDetails);
     }
 
-    public void printRoute(List<Wrapper> wrappers) {
-        System.out.println(wrappers.get(0).getNode().getName() + " - abfahrt: " + wrappers.get(0).getTimetable().getDeparture() + " - line: " + wrappers.get(0).getTimetable().getLine().getName() + " - type: " + wrappers.get(0).getTimetable().getLine().getTrafficType());
-        for (int i = 1; i < wrappers.size(); i ++) {
-            System.out.println(wrappers.get(i).getNode().getName() + " - ankunft: " + wrappers.get(i).getTimetable().getArrival() + " - line: " + wrappers.get(i).getTimetable().getLine().getName() + " - type: " + wrappers.get(i).getTimetable().getLine().getTrafficType());
+    public void printRoute(Route route) {
+        System.out.println(route.getRouteDetails().getFirst().getName() + " - abfahrt: " + route.getRouteDetails().getFirst().getDeparture());
+        for (int i = 1; i < route.getRouteDetails().size(); i++) {
+            System.out.println(route.getRouteDetails().get(i).getName() + " - ankunft: " + route.getRouteDetails().get(i).getArrival());
         }
     }
 

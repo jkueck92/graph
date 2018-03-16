@@ -14,14 +14,14 @@ public class TestDijkstra {
     @Test
     public void test01() {
 
-        Line line1 = new Line("S1", null, TrafficType.TRAIN);
+        Line line1 = new Line("S1", null, TrafficType.BUS);
         Line line2 = new Line("S2", null, TrafficType.TRAIN);
-        Line line3 = new Line("S3", null, TrafficType.TRAIN);
+        /*Line line3 = new Line("S3", null, TrafficType.TRAIN);
         Line line4 = new Line("S4", null, TrafficType.TRAIN);
         Line line5 = new Line("S5", null, TrafficType.TRAIN);
-        Line line6 = new Line("S6", null, TrafficType.TRAIN);
-        Line line7 = new Line("S7", null, TrafficType.TRAIN);
-        Line line8 = new Line("S8", null, TrafficType.TRAIN);
+        Line line6 = new Line("S6", null, TrafficType.TRAIN);*/
+        Line line7 = new Line("S7", null, TrafficType.BUS);
+        Line line8 = new Line("S8", null, TrafficType.SUBWAY);
 
         Node nodeA = new Node("A");
         Node nodeB = new Node("B");
@@ -105,14 +105,14 @@ public class TestDijkstra {
         graph.getNodes().add(nodeI);*/
 
         Dijkstra dijkstra = new Dijkstra();
-        List<Wrapper> wrapperList = dijkstra.dijkstra02(nodeA, nodeD, new LocalDateTime(2018, 3, 16, 0, 5));
+        Route route = dijkstra.dijkstra02(nodeA, nodeD, new LocalDateTime(2018, 3, 16, 0, 5));
         /*for (Wrapper wrapper : wrapperList) {
             System.out.println(wrapper.getNode().getName());
         }*/
 
         System.out.println("");
 
-        dijkstra.printRoute(wrapperList);
+        dijkstra.printRoute(route);
 
         System.out.println("");
 
