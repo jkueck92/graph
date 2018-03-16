@@ -2,6 +2,7 @@ package de.jkueck.graph.dijkstra;
 
 import de.jkueck.graph.common.TimetableUtils;
 import de.jkueck.graph.model.Timetable;
+import org.apache.log4j.Logger;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.Minutes;
@@ -9,6 +10,8 @@ import org.joda.time.Minutes;
 import java.util.*;
 
 public class Dijkstra {
+
+    private static final Logger log = Logger.getLogger(Dijkstra.class);
 
     public Route dijkstra02(Node start, Node end, LocalDateTime departureDateTime) {
 
@@ -22,32 +25,39 @@ public class Dijkstra {
 
         PriorityQueue<Wrapper> priorityQueue = new PriorityQueue<>();
         priorityQueue.add(wrapper);
+        log.debug("add initial wrapper to queue: " + wrapper);
 
         LocalTime tmpLocalTime = departureDateTime.toLocalTime();
 
         while (!priorityQueue.isEmpty()) {
 
             Wrapper minWrapper = priorityQueue.poll();
+            log.debug("poll minWrapper from queue: " + minWrapper);
 
             if (minWrapper.getTimetable() != null) {
                 tmpLocalTime = minWrapper.getTimetable().getArrival();
+                log.debug("set tmpLocalTime to: " + tmpLocalTime);
             }
 
             if (minWrapper.getNode().equals(end)) {
+                log.debug("found end node, cancel dijkstra: " + end);
                 break;
             }
 
             for (Edge edge : minWrapper.getNode().getOut()) {
 
                 Timetable timetable = TimetableUtils.findNextDeparture(edge.getTimetables(), tmpLocalTime);
+                log.debug("found timetable: " + timetable);
 
                 if (!costs.containsKey(edge.getTo().getName())) {
                     costs.put(edge.getTo().getName(), Integer.MAX_VALUE);
+                    log.debug("add new entry to costs: " + edge.getTo().getName() + " -> " + Integer.MAX_VALUE);
                 }
 
                 if (timetable != null) {
 
                     int totalCosts = getTotalCosts(tmpLocalTime, minWrapper, timetable);
+                    log.debug("calculated total costs: " + totalCosts);
 
                     Wrapper w = new Wrapper();
                     if (totalCosts <= costs.get(edge.getTo().getName())) {
@@ -61,15 +71,17 @@ public class Dijkstra {
                             minWrapper.setTimetable(timetable);
                         }
 
+                        log.debug("add new wrapper to queue: " + w);
+
                         priorityQueue.add(w);
                         wrappers.add(w);
 
                         costs.put(edge.getTo().getName(), totalCosts);
+                        log.debug("refresh costs in costs: " + edge.getTo().getName() + " -> " + totalCosts);
 
                     }
                 }
             }
-
 
         }
 
@@ -103,9 +115,9 @@ public class Dijkstra {
     }
 
     public void printRoute(Route route) {
-        System.out.println(route.getRouteDetails().getFirst().getName() + " - abfahrt: " + route.getRouteDetails().getFirst().getDeparture());
+        log.info(route.getRouteDetails().getFirst().getName() + " - abfahrt: " + route.getRouteDetails().getFirst().getDeparture());
         for (int i = 1; i < route.getRouteDetails().size(); i++) {
-            System.out.println(route.getRouteDetails().get(i).getName() + " - ankunft: " + route.getRouteDetails().get(i).getArrival());
+            log.info(route.getRouteDetails().get(i).getName() + " - ankunft: " + route.getRouteDetails().get(i).getArrival());
         }
     }
 

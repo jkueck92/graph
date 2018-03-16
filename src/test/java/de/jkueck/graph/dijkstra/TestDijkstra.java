@@ -3,6 +3,7 @@ package de.jkueck.graph.dijkstra;
 import de.jkueck.graph.model.Line;
 import de.jkueck.graph.model.Timetable;
 import de.jkueck.graph.model.TrafficType;
+import org.apache.log4j.Logger;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.junit.jupiter.api.Test;
@@ -10,6 +11,8 @@ import org.junit.jupiter.api.Test;
 import java.util.List;
 
 public class TestDijkstra {
+
+    private static final Logger log = Logger.getLogger(TestDijkstra.class);
 
     @Test
     public void test01() {
@@ -110,19 +113,17 @@ public class TestDijkstra {
             System.out.println(wrapper.getNode().getName());
         }*/
 
-        System.out.println("");
+
+        log.info("");
 
         dijkstra.printRoute(route);
 
-        System.out.println("");
+        log.info("");
 
     }
 
     @Test
     public void test02() {
-
-
-
 
     }
 

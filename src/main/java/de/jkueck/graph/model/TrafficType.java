@@ -4,5 +4,6 @@ public enum TrafficType {
 
     TRAIN,
     SUBWAY,
-    BUS
+    BUS,
+    SWITCH
 }
