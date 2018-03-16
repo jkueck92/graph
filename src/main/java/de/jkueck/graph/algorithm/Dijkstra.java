@@ -1,7 +1,9 @@
 package de.jkueck.graph.algorithm;
 
 import de.jkueck.graph.common.TimetableUtils;
-import de.jkueck.graph.model.*;
+import de.jkueck.graph.model.DijkstraRequest;
+import de.jkueck.graph.model.Route;
+import de.jkueck.graph.model.RouteDetail;
 import de.jkueck.graph.model.graph.*;
 import org.apache.log4j.Logger;
 import org.joda.time.LocalTime;
@@ -79,10 +81,12 @@ public class Dijkstra {
 
                         if (tmpLine != null && !tmpLine.getName().equals(timetable.getLine().getName())) {
                             changeCounter++;
-                            if (changeCounter > request.getMaxChanges()) {
+                            // TODO: pruefung der umstiege, ob aktuelle anzahl > max anzahl
+                            /*if (changeCounter > request.getMaxChanges()) {
                                 log.warn("actual changes " + changeCounter + " > [" + request.getMaxChanges() + "] abort dijkstra");
                                 break;
-                            }
+                            }*/
+                            w.setChanges(minWrapper.getChanges() + 1);
                         }
                         tmpLine = timetable.getLine();
 
@@ -102,7 +106,7 @@ public class Dijkstra {
 
         Collections.reverse(wrappers);
 
-        return this.getRoute(wrappers, request.getEndNode(), changeCounter);
+        return this.getRoute(wrappers, request.getEndNode());
 
     }
 
@@ -113,12 +117,13 @@ public class Dijkstra {
         return a + b + c;
     }
 
-    private Route getRoute(List<Wrapper> wrappers, Node end, int changes) {
+    private Route getRoute(List<Wrapper> wrappers, Node end) {
         LinkedList<RouteDetail> routeDetails = new LinkedList<>();
         Wrapper wrapper = null;
         for (Wrapper tmpWrapper : wrappers) {
             if (tmpWrapper.getNode().getName().equals(end.getName())) {
                 wrapper = tmpWrapper;
+                break;
             }
         }
         while (wrapper != null) {
@@ -126,10 +131,11 @@ public class Dijkstra {
             wrapper = wrapper.getPrevious();
         }
         Collections.reverse(routeDetails);
+        // TODO: hier muss die richtige anzahl der umstiege ermittelt werden, steht nicht immer an der ersten oder letzten stelle
         if (routeDetails.isEmpty()) {
-            return new Route("no route found", new LinkedList<>(), changes);
+            return new Route("no route found", new LinkedList<>(), wrappers.get(0).getChanges());
         } else {
-            return new Route(routeDetails.getFirst().getName() + " -> " + routeDetails.getLast().getName(), routeDetails, changes);
+            return new Route(routeDetails.getFirst().getName() + " -> " + routeDetails.getLast().getName(), routeDetails, wrappers.get(0).getChanges());
         }
     }
 

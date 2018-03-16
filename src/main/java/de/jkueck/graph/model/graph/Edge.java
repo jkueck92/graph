@@ -19,16 +19,12 @@ public class Edge implements Serializable {
     private Node to;
 
     @Getter
-    private int costs;
-
-    @Getter
     @Setter
     private Set<Timetable> timetables = new HashSet<>();
 
-    public Edge(Node from, Node to, int costs) {
+    public Edge(Node from, Node to) {
         this.from = from;
         this.to = to;
-        this.costs = costs;
         this.name = from.getName() + " -> " + to.getName();
     }
 

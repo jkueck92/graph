@@ -21,6 +21,10 @@ public class Wrapper implements Comparable<Wrapper> {
     @Setter
     private Timetable timetable;
 
+    @Getter
+    @Setter
+    private int changes = 0;
+
     @Override
     public int compareTo(Wrapper o) {
         return Integer.compare(this.costs, o.getCosts());
