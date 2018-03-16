@@ -47,16 +47,13 @@ public class Dijkstra {
 
                 if (timetable != null) {
 
-                    int a = timetable.getDuration().getMinutes();
-                    int b = Minutes.minutesBetween(tmpLocalTime, timetable.getDeparture()).getMinutes();
-                    int c = minWrapper.getCosts();
-                    int d = a + b + c;
+                    int totalCosts = getTotalCosts(tmpLocalTime, minWrapper, timetable);
 
                     Wrapper w = new Wrapper();
-                    if (d <= costs.get(edge.getTo().getName())) {
+                    if (totalCosts <= costs.get(edge.getTo().getName())) {
 
                         w.setNode(edge.getTo());
-                        w.setCosts(d);
+                        w.setCosts(totalCosts);
                         w.setPrevious(minWrapper);
                         w.setTimetable(timetable);
 
@@ -67,7 +64,7 @@ public class Dijkstra {
                         priorityQueue.add(w);
                         wrappers.add(w);
 
-                        costs.put(edge.getTo().getName(), d);
+                        costs.put(edge.getTo().getName(), totalCosts);
 
                     }
                 }
@@ -80,6 +77,13 @@ public class Dijkstra {
 
         return this.getRoute(wrappers, end);
 
+    }
+
+    private int getTotalCosts(LocalTime tmpLocalTime, Wrapper minWrapper, Timetable timetable) {
+        int a = timetable.getDuration().getMinutes();
+        int b = Minutes.minutesBetween(tmpLocalTime, timetable.getDeparture()).getMinutes();
+        int c = minWrapper.getCosts();
+        return a + b + c;
     }
 
     private Route getRoute(List<Wrapper> wrappers, Node end) {
