@@ -1,7 +1,7 @@
-package de.jkueck.graph.dijkstra;
+package de.jkueck.graph.algorithm;
 
-import de.jkueck.graph.algorithm.Dijkstra;
-import de.jkueck.graph.model.*;
+import de.jkueck.graph.model.DijkstraRequest;
+import de.jkueck.graph.model.Route;
 import de.jkueck.graph.model.graph.*;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
