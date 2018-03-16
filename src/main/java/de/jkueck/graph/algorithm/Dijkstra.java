@@ -1,6 +1,8 @@
-package de.jkueck.graph.dijkstra;
+package de.jkueck.graph.algorithm;
 
 import de.jkueck.graph.common.TimetableUtils;
+import de.jkueck.graph.model.*;
+import de.jkueck.graph.model.graph.*;
 import org.apache.log4j.Logger;
 import org.joda.time.LocalTime;
 import org.joda.time.Minutes;

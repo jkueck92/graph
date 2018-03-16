@@ -1,4 +1,4 @@
-package de.jkueck.graph.dijkstra;
+package de.jkueck.graph.model;
 
 import lombok.Getter;
 

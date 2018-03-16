@@ -1,5 +1,6 @@
-package de.jkueck.graph.dijkstra;
+package de.jkueck.graph.model;
 
+import de.jkueck.graph.model.graph.Node;
 import lombok.Getter;
 import org.joda.time.LocalDateTime;
 

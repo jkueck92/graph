@@ -1,5 +1,8 @@
 package de.jkueck.graph.dijkstra;
 
+import de.jkueck.graph.algorithm.Dijkstra;
+import de.jkueck.graph.model.*;
+import de.jkueck.graph.model.graph.*;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.junit.jupiter.api.Test;
