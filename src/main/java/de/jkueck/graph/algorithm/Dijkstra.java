@@ -11,7 +11,7 @@ import java.util.*;
 public class Dijkstra {
 
     public Route dijsktra1(Node startNode, Node endNode, LocalDateTime departureDateTime) {
-
+/*
         LocalTime tmpDepartureTime = departureDateTime.toLocalTime();
 
         PriorityQueue<Node> priorityQueue = new PriorityQueue<>();
@@ -67,13 +67,13 @@ public class Dijkstra {
         Route route = new Route(null, endNode.getCosts());
 
         route.getRouteDetails().addAll(routeNodes);
-
-        return route;
+*/
+        return null;
 
     }
 
     public Route dijsktra(Node startNode, Node endNode) {
-
+/*
         PriorityQueue<Node> priorityQueue = new PriorityQueue<>();
 
         startNode.setCosts(0);
@@ -113,8 +113,8 @@ public class Dijkstra {
 
         route.getRouteDetails().addAll(tmpRoute);
         // route.setName(route.getRouteDetails().getFirst().getName() + " -> " + route.getRouteDetails().getLast().getName());
-
-        return route;
+*/
+        return null;
     }
 
 }

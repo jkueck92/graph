@@ -23,31 +23,31 @@ public class TestGraphTimetable {
         Node nodeF = new Node("F");
 
         Edge edgeAB = new Edge(nodeA, nodeB);
-        edgeAB.getTimetables().add(new Timetable(line1, new LocalTime(0, 10), new LocalTime(0, 20), edgeAB));
+        edgeAB.getTimetables().add(new Timetable(line1, new LocalTime(0, 10), new LocalTime(0, 20)));
         nodeA.getOut().add(edgeAB);
 
         Edge edgeAF = new Edge(nodeA, nodeF);
-        edgeAF.getTimetables().add(new Timetable(line3, new LocalTime(0, 12), new LocalTime(0, 15), edgeAF));
+        edgeAF.getTimetables().add(new Timetable(line3, new LocalTime(0, 12), new LocalTime(0, 15)));
         nodeA.getOut().add(edgeAF);
 
         Edge edgeBE = new Edge(nodeB, nodeE);
-        edgeBE.getTimetables().add(new Timetable(line1, new LocalTime(0, 25), new LocalTime(0, 35), edgeBE));
+        edgeBE.getTimetables().add(new Timetable(line1, new LocalTime(0, 25), new LocalTime(0, 35)));
         nodeB.getOut().add(edgeBE);
 
         Edge edgeBC = new Edge(nodeB, nodeC);
-        edgeBC.getTimetables().add(new Timetable(line2, new LocalTime(0, 22), new LocalTime(0, 24), edgeBC));
+        edgeBC.getTimetables().add(new Timetable(line2, new LocalTime(0, 22), new LocalTime(0, 24)));
         nodeB.getOut().add(edgeBC);
 
         Edge edgeCD = new Edge(nodeC, nodeD);
-        edgeCD.getTimetables().add(new Timetable(line2, new LocalTime(0, 24), new LocalTime(0, 26), edgeCD));
+        edgeCD.getTimetables().add(new Timetable(line2, new LocalTime(0, 24), new LocalTime(0, 26)));
         nodeC.getOut().add(edgeCD);
 
         Edge edgeDE = new Edge(nodeD, nodeE);
-        edgeDE.getTimetables().add(new Timetable(line2, new LocalTime(0, 26), new LocalTime(0, 29), edgeDE));
+        edgeDE.getTimetables().add(new Timetable(line2, new LocalTime(0, 26), new LocalTime(0, 29)));
         nodeD.getOut().add(edgeDE);
 
         Edge edgeFE = new Edge(nodeF, nodeE);
-        edgeFE.getTimetables().add(new Timetable(line3, new LocalTime(0, 15), new LocalTime(0, 31), edgeFE));
+        edgeFE.getTimetables().add(new Timetable(line3, new LocalTime(0, 15), new LocalTime(0, 31)));
         nodeF.getOut().add(edgeFE);
 
         Graph graph = new Graph();
@@ -84,35 +84,35 @@ public class TestGraphTimetable {
         Node nodeF = new Node("F");
 
         Edge edgeAB = new Edge(nodeA, nodeB);
-        edgeAB.getTimetables().add(new Timetable(line2, new LocalTime(0, 10), new LocalTime(0, 50), edgeAB));
+        edgeAB.getTimetables().add(new Timetable(line2, new LocalTime(0, 10), new LocalTime(0, 50)));
         nodeA.getOut().add(edgeAB);
 
         Edge edgeBC = new Edge(nodeB, nodeC);
-        edgeBC.getTimetables().add(new Timetable(line2, new LocalTime(0, 50), new LocalTime(0, 56), edgeBC));
+        edgeBC.getTimetables().add(new Timetable(line2, new LocalTime(0, 50), new LocalTime(0, 56)));
         nodeB.getOut().add(edgeBC);
 
         Edge edgeAD = new Edge(nodeA, nodeD);
-        edgeAD.getTimetables().add(new Timetable(line1, new LocalTime(0, 15), new LocalTime(0, 20), edgeAD));
+        edgeAD.getTimetables().add(new Timetable(line1, new LocalTime(0, 15), new LocalTime(0, 20)));
         nodeA.getOut().add(edgeAD);
 
         Edge edgeDE = new Edge(nodeD, nodeE);
-        edgeDE.getTimetables().add(new Timetable(line3, new LocalTime(0, 25), new LocalTime(0, 27), edgeDE));
+        edgeDE.getTimetables().add(new Timetable(line3, new LocalTime(0, 25), new LocalTime(0, 27)));
         nodeD.getOut().add(edgeDE);
 
         Edge edgeEF = new Edge(nodeE, nodeF);
-        edgeEF.getTimetables().add(new Timetable(line3, new LocalTime(0, 27), new LocalTime(0, 32), edgeEF));
+        edgeEF.getTimetables().add(new Timetable(line3, new LocalTime(0, 27), new LocalTime(0, 32)));
         nodeE.getOut().add(edgeEF);
 
         Edge edgeDC = new Edge(nodeD, nodeC);
-        edgeDC.getTimetables().add(new Timetable(line1, new LocalTime(0, 20), new LocalTime(0, 44), edgeDC));
+        edgeDC.getTimetables().add(new Timetable(line1, new LocalTime(0, 20), new LocalTime(0, 44)));
         nodeD.getOut().add(edgeDC);
 
         Edge edgeFB = new Edge(nodeF, nodeB);
-        edgeFB.getTimetables().add(new Timetable(line3, new LocalTime(0, 32), new LocalTime(0, 45), edgeFB));
+        edgeFB.getTimetables().add(new Timetable(line3, new LocalTime(0, 32), new LocalTime(0, 45)));
         nodeF.getOut().add(edgeFB);
 
         Edge edgeFC = new Edge(nodeF, nodeC);
-        edgeFC.getTimetables().add(new Timetable(line4, new LocalTime(0, 35), new LocalTime(0, 37), edgeFC));
+        edgeFC.getTimetables().add(new Timetable(line4, new LocalTime(0, 35), new LocalTime(0, 37)));
         nodeF.getOut().add(edgeFC);
 
         Graph graph = new Graph();
