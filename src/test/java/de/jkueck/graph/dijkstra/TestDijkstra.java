@@ -1,18 +1,12 @@
 package de.jkueck.graph.dijkstra;
 
-import de.jkueck.graph.model.Line;
-import de.jkueck.graph.model.Timetable;
-import de.jkueck.graph.model.TrafficType;
-import org.apache.log4j.Logger;
 import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class TestDijkstra {
-
-    private static final Logger log = Logger.getLogger(TestDijkstra.class);
 
     @Test
     public void test01() {
@@ -31,7 +25,7 @@ public class TestDijkstra {
         edgeAB.getTimetables().add(new Timetable(line2, new LocalTime(0, 10), new LocalTime(0, 20)));
 
         Edge edgeAC = new Edge(nodeA, nodeC, 13);
-        edgeAC.getTimetables().add(new Timetable(line1, new LocalTime(0, 07), new LocalTime(0, 21)));
+        edgeAC.getTimetables().add(new Timetable(line1, new LocalTime(0, 7), new LocalTime(0, 21)));
 
         Edge edgeBD = new Edge(nodeB, nodeD, 2);
         edgeBD.getTimetables().add(new Timetable(line2, new LocalTime(0, 20), new LocalTime(0, 22)));

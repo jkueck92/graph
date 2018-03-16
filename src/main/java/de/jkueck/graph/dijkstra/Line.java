@@ -1,11 +1,8 @@
-package de.jkueck.graph.model;
+package de.jkueck.graph.dijkstra;
 
 import lombok.Getter;
 
 public class Line {
-
-    @Getter
-    private long id;
 
     @Getter
     private String name;
@@ -15,13 +12,6 @@ public class Line {
 
     @Getter
     private TrafficType trafficType;
-
-    public Line(long id, String name, String header, TrafficType trafficType) {
-        this.id = id;
-        this.name = name;
-        this.header = header;
-        this.trafficType = trafficType;
-    }
 
     public Line(String name, String header, TrafficType trafficType) {
         this.name = name;

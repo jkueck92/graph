@@ -1,10 +1,7 @@
 package de.jkueck.graph.dijkstra;
 
 import de.jkueck.graph.common.TimetableUtils;
-import de.jkueck.graph.model.Line;
-import de.jkueck.graph.model.Timetable;
 import org.apache.log4j.Logger;
-import org.joda.time.LocalDateTime;
 import org.joda.time.LocalTime;
 import org.joda.time.Minutes;
 

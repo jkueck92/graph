@@ -1,11 +1,7 @@
 package de.jkueck.graph.dijkstra;
 
-import de.jkueck.graph.model.Timetable;
 import lombok.Getter;
 import lombok.Setter;
-
-import java.util.HashSet;
-import java.util.Set;
 
 public class Wrapper implements Comparable<Wrapper> {
 
@@ -27,13 +23,7 @@ public class Wrapper implements Comparable<Wrapper> {
 
     @Override
     public int compareTo(Wrapper o) {
-        if (this.costs > o.getCosts()) {
-            return 1;
-        } else if (this.costs < o.getCosts()) {
-            return -1;
-        } else {
-            return 0;
-        }
+        return Integer.compare(this.costs, o.getCosts());
     }
 
     @Override

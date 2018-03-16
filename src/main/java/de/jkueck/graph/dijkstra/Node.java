@@ -1,9 +1,7 @@
 package de.jkueck.graph.dijkstra;
 
 import lombok.Getter;
-import lombok.Setter;
 
-import java.io.Serializable;
 import java.util.HashSet;
 import java.util.Set;
 

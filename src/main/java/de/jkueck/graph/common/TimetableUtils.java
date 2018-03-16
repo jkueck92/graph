@@ -1,6 +1,6 @@
 package de.jkueck.graph.common;
 
-import de.jkueck.graph.model.Timetable;
+import de.jkueck.graph.dijkstra.Timetable;
 import org.joda.time.LocalTime;
 
 import java.util.Set;

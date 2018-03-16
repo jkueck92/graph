@@ -1,6 +1,5 @@
 package de.jkueck.graph.dijkstra;
 
-import de.jkueck.graph.model.Timetable;
 import lombok.Getter;
 import lombok.Setter;
 

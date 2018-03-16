@@ -1,9 +1,8 @@
-package de.jkueck.graph.model;
+package de.jkueck.graph.dijkstra;
 
 public enum TrafficType {
 
     TRAIN,
     SUBWAY,
-    BUS,
-    SWITCH
+    BUS
 }

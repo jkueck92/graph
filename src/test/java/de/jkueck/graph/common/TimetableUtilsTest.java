@@ -1,13 +1,13 @@
 package de.jkueck.graph.common;
 
-import de.jkueck.graph.model.Timetable;
+import de.jkueck.graph.dijkstra.Timetable;
 import org.joda.time.LocalTime;
 import org.junit.jupiter.api.Test;
 
 import java.util.HashSet;
 import java.util.Set;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertNull;
 
 public class TimetableUtilsTest {
 
