@@ -1,6 +1,7 @@
 package de.jkueck.graph.dijkstra;
 
 import de.jkueck.graph.common.TimetableUtils;
+import de.jkueck.graph.model.Line;
 import de.jkueck.graph.model.Timetable;
 import org.apache.log4j.Logger;
 import org.joda.time.LocalDateTime;
@@ -13,7 +14,9 @@ public class Dijkstra {
 
     private static final Logger log = Logger.getLogger(Dijkstra.class);
 
-    public Route dijkstra02(Node start, Node end, LocalDateTime departureDateTime) {
+    public Route dijkstra02(DijkstraRequest request) {
+
+        log.debug("start dijkstra with: " + request);
 
         HashMap<String, Integer> costs = new HashMap<>();
 
@@ -21,13 +24,17 @@ public class Dijkstra {
 
         Wrapper wrapper = new Wrapper();
         wrapper.setCosts(0);
-        wrapper.setNode(start);
+        wrapper.setNode(request.getStartNode());
 
         PriorityQueue<Wrapper> priorityQueue = new PriorityQueue<>();
         priorityQueue.add(wrapper);
         log.debug("add initial wrapper to queue: " + wrapper);
 
-        LocalTime tmpLocalTime = departureDateTime.toLocalTime();
+        LocalTime tmpLocalTime = request.getDepartureDateTime().toLocalTime();
+
+        Line tmpLine = null;
+
+        int changeCounter = 0;
 
         while (!priorityQueue.isEmpty()) {
 
@@ -39,8 +46,8 @@ public class Dijkstra {
                 log.debug("set tmpLocalTime to: " + tmpLocalTime);
             }
 
-            if (minWrapper.getNode().equals(end)) {
-                log.debug("found end node, cancel dijkstra: " + end);
+            if (minWrapper.getNode().equals(request.getEndNode())) {
+                log.debug("found end node, cancel dijkstra: " + request.getEndNode());
                 break;
             }
 
@@ -71,6 +78,15 @@ public class Dijkstra {
                             minWrapper.setTimetable(timetable);
                         }
 
+                        if (tmpLine != null && !tmpLine.getName().equals(timetable.getLine().getName())) {
+                            changeCounter++;
+                            if (changeCounter > request.getMaxChanges()) {
+                                log.warn("actual changes " + changeCounter + " > [" + request.getMaxChanges() + "] abort dijkstra");
+                                break;
+                            }
+                        }
+                        tmpLine = timetable.getLine();
+
                         log.debug("add new wrapper to queue: " + w);
 
                         priorityQueue.add(w);
@@ -87,7 +103,7 @@ public class Dijkstra {
 
         Collections.reverse(wrappers);
 
-        return this.getRoute(wrappers, end);
+        return this.getRoute(wrappers, request.getEndNode(), changeCounter);
 
     }
 
@@ -98,7 +114,7 @@ public class Dijkstra {
         return a + b + c;
     }
 
-    private Route getRoute(List<Wrapper> wrappers, Node end) {
+    private Route getRoute(List<Wrapper> wrappers, Node end, int changes) {
         LinkedList<RouteDetail> routeDetails = new LinkedList<>();
         Wrapper wrapper = null;
         for (Wrapper tmpWrapper : wrappers) {
@@ -107,17 +123,27 @@ public class Dijkstra {
             }
         }
         while (wrapper != null) {
-            routeDetails.add(new RouteDetail(wrapper.getNode().getName(), wrapper.getTimetable().getArrival(), wrapper.getTimetable().getDeparture()));
+            routeDetails.add(new RouteDetail(wrapper.getNode().getName(), wrapper.getTimetable().getArrival(), wrapper.getTimetable().getDeparture(), wrapper.getTimetable().getLine()));
             wrapper = wrapper.getPrevious();
         }
         Collections.reverse(routeDetails);
-        return new Route(routeDetails.getFirst().getName() + " -> " + routeDetails.getLast().getName(), routeDetails);
+        if (routeDetails.isEmpty()) {
+            return new Route("no route found", new LinkedList<>(), changes);
+        } else {
+            return new Route(routeDetails.getFirst().getName() + " -> " + routeDetails.getLast().getName(), routeDetails, changes);
+        }
     }
 
     public void printRoute(Route route) {
-        log.info(route.getRouteDetails().getFirst().getName() + " - abfahrt: " + route.getRouteDetails().getFirst().getDeparture());
-        for (int i = 1; i < route.getRouteDetails().size(); i++) {
-            log.info(route.getRouteDetails().get(i).getName() + " - ankunft: " + route.getRouteDetails().get(i).getArrival());
+        if (!route.getRouteDetails().isEmpty()) {
+            log.info("found route: " + route.getName());
+            log.info("max changes: " + route.getChanges());
+            log.info(route.getRouteDetails().getFirst().getName() + " - abfahrt: " + route.getRouteDetails().getFirst().getDeparture() + " - line: " + route.getRouteDetails().getFirst().getLine().getName() + " - type: " + route.getRouteDetails().getFirst().getLine().getTrafficType());
+            for (int i = 1; i < route.getRouteDetails().size(); i++) {
+                log.info(route.getRouteDetails().get(i).getName() + " - ankunft: " + route.getRouteDetails().get(i).getArrival() + " - line: " + route.getRouteDetails().get(i).getLine().getName() + " - type: " + route.getRouteDetails().get(i).getLine().getTrafficType());
+            }
+        } else {
+            log.info("found no route");
         }
     }
 

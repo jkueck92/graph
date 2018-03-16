@@ -10,11 +10,15 @@ public class Route {
     private String name;
 
     @Getter
+    private int changes;
+
+    @Getter
     private LinkedList<RouteDetail> routeDetails;
 
-    public Route(String name, LinkedList<RouteDetail> routeDetails) {
+    public Route(String name, LinkedList<RouteDetail> routeDetails, int changes) {
         this.name = name;
         this.routeDetails = routeDetails;
+        this.changes = changes;
     }
 
 }
